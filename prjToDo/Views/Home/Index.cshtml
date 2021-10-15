@@ -1,0 +1,45 @@
+﻿@model IEnumerable<prjToDo.Models.tToDo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("新增代辦事項", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.fTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fimage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fTitle)
+        </td>
+        <td>
+            <img src="~/testimage/@item.fimage" width="256" />            
+        </td>
+        <td>
+          @DateTime.Parse(item.fDate.ToString()).ToShortDateString()
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.fId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.fId },
+                    new { onclik="return confirm('確定刪除嗎?')"})
+        </td>
+    </tr>
+}
+
+</table>
